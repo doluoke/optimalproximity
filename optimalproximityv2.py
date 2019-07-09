@@ -13,13 +13,13 @@ import numpy as np
 import seaborn as sns
 import civis.io
 import zipfile
-#import geopandas as gpd
-#from shapely.geometry import Point,multipoint
-#from shapely.ops import nearest_points
+import geopandas as gpd
+from shapely.geometry import Point,multipoint
+from shapely.ops import nearest_points
 import itertools
 from scipy import stats
 #import contextily as ctx
-#from fiona.crs import from_epsg
+from fiona.crs import from_epsg
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -27,7 +27,7 @@ import matplotlib
 #%matplotlib inline
 
 #--------------------------------------------------------------
-#print(os.getcwd())
+print('This code started')
 #table = os.environ["table_01"]
 #table2 = os.environ["table_02"]
 #print('This is table 01:' , table)
@@ -78,7 +78,7 @@ FROM ''' + '''dev.high_water_rescue''' + ''' as h
 ORDER BY h.objectid_1
 
 '''
-
+print('This code completed')
 highwater_table = civis.io.read_civis_sql(
     highwater_query,"City of Houston",use_pandas=True
 )
