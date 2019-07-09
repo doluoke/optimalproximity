@@ -27,13 +27,13 @@ import matplotlib
 #%matplotlib inline
 
 #--------------------------------------------------------------
-print(os.getcwd())
-table = os.environ["table_01"]
-table2 = os.environ["table_02"]
-print('This is table 01:' , table)
-print('This is table 02:' ,table2)
-print('This type table 01:' ,type(table))
-print('This type table 02:' ,type(table2))
+#print(os.getcwd())
+#table = os.environ["table_01"]
+#table2 = os.environ["table_02"]
+#print('This is table 01:' , table)
+#print('This is table 02:' ,table2)
+#print('This type table 01:' ,type(table))
+#print('This type table 02:' ,type(table2))
 #--------------------------------------------------------------
 
 # record level data 
