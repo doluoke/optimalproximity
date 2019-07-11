@@ -33,8 +33,8 @@ import matplotlib
 print('This code started')
 #conn = create_engine('redshift+psycopg2://dokeowo@host.amazonaws.com:5439/database')
 print('This is 0 after python', sys.argv[0], 'and type is:', type(sys.argv[0]))
-print('This is 1 after python', sys.argv[1], 'and type is:', int(type(sys.argv[1])))
-print('This is 2 after python', sys.argv[2], 'and type is:', float(type(sys.argv[2])))
+print('This is 1 after python', sys.argv[1], 'and type is:', type(int(sys.argv[1])))
+print('This is 2 after python', sys.argv[2], 'and type is:', type(float(sys.argv[2])))
 print('This is 3 after python', sys.argv[3], 'and type is:', type(sys.argv[3]))
 print('This is 3 after python', sys.argv[4], 'and type is:', type(sys.argv[4]))
 
