@@ -38,7 +38,10 @@ print('This is 2 after python', sys.argv[2], 'and type is:', type(float(sys.argv
 print('This is 3 after python', sys.argv[3], 'and type is:', type(sys.argv[3]))
 print('This is 3 after python', sys.argv[4], 'and type is:', type(sys.argv[4]))
 
+table_01 = '''fed.task6_civis_estimate_serious_damage_leftjoin_hud__demographics'''
 
+
+table_02 = '''dev.high_water_rescue'''
 #table = os.environ["table_01"]
 #table2 = os.environ["table_02"]
 #print('This is table 01:' , table)
@@ -57,7 +60,7 @@ unmatched_query= '''
       latitude as latitude_ref,
       longitude as longitude_ref,serious_damage_bucket__hazus,flood_zone_type__hazus,
       neighborhood__hazus
-    FROM ''' + '''fed.task6_civis_estimate_serious_damage_leftjoin_hud__demographics''' + ''' as ia
+    FROM ''' + table_01 + ''' as ia
     WHERE data_boolean__hud=0
     
     ORDER BY userdefinedfltyid
@@ -96,7 +99,7 @@ SELECT
         long as longitude
 
 
-FROM ''' + '''dev.high_water_rescue''' + ''' as h
+FROM ''' + table_02 + ''' as h
 
    
 ORDER BY h.objectid_1
