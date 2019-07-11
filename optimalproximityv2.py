@@ -32,7 +32,10 @@ import matplotlib
 #--------------------------------------------------------------
 print('This code started')
 #conn = create_engine('redshift+psycopg2://dokeowo@host.amazonaws.com:5439/database')
-print('This is table', sys.argv[0])
+print('This is 0 after python', sys.argv[0])
+print('This is 1 after python', sys.argv[1])
+print('This is 2 after python', sys.argv[2])
+print('This is 3 after python', sys.argv[3])
 #table = os.environ["table_01"]
 #table2 = os.environ["table_02"]
 #print('This is table 01:' , table)
