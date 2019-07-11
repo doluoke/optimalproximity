@@ -30,7 +30,7 @@ import matplotlib
 
 #--------------------------------------------------------------
 print('This code started')
-conn = = create_engine('redshift+psycopg2://dokeowo@host.amazonaws.com:5439/database')
+conn = create_engine('redshift+psycopg2://dokeowo@host.amazonaws.com:5439/database')
 #print('This is table', table_01)
 #table = os.environ["table_01"]
 #table2 = os.environ["table_02"]
