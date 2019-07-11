@@ -138,4 +138,8 @@ def ckdnearest(gdA, gdB, bcol):
 # 2c) highwater rescues
 nearest_highwater =ckdnearest(unmatched_query_geo_prj, highwater_geo_prj,'objectid_1')
 
+#..................................................................
+create schema optimal authorization dokeowo
+
+
 print('I got to the last line')
