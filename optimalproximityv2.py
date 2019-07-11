@@ -40,9 +40,13 @@ print('This code started')
 
 #table_01 = '''fed.task6_civis_estimate_serious_damage_leftjoin_hud__demographics'''
 table_01 = sys.argv[1]
-table_02 = sys.argv[2]
+ref_01   = int(sys.argv[2])
+table_02 = sys.argv[3]
+ref_02   = int(sys.argv[4])
 
 #table_02 = '''dev.high_water_rescue'''
+# ref_01 = 4326
+# ref_02 = 4326
 #table = os.environ["table_01"]
 #table2 = os.environ["table_02"]
 #print('This is table 01:' , table)
@@ -83,7 +87,7 @@ unmatched_query_geo['geometry'] = unmatched_query_geo.point
 # 1c) Convert umatched point -unmatched_query_geo from Geographic to UTM Zone 15N
 unmatched_query_geo_crs = unmatched_query_geo
 # Assign WGS 84 Coordinate System
-unmatched_query_geo_crs.crs = from_epsg(4326)
+unmatched_query_geo_crs.crs = from_epsg(ref_01)
 # Project from WGS to Projected Coordinate System
 unmatched_query_geo_prj = unmatched_query_geo_crs.to_crs(epsg=32615)
 
@@ -126,7 +130,7 @@ highwater_geo['geometry'] = highwater_geo.point
 #print(debris_geo.crs)
 highwater_geo_crs = highwater_geo
 # Assign WGS 84 Coordinate System
-highwater_geo_crs.crs = from_epsg(4326)
+highwater_geo_crs.crs = from_epsg(ref_02)
 print(highwater_geo.crs)
 #Project from WGS to Projected Coordinate System
 highwater_geo_prj = highwater_geo.to_crs(epsg=32615)
