@@ -38,10 +38,11 @@ print('This is 2 after python', sys.argv[2], 'and type is:', type(float(sys.argv
 print('This is 3 after python', sys.argv[3], 'and type is:', type(sys.argv[3]))
 print('This is 3 after python', sys.argv[4], 'and type is:', type(sys.argv[4]))
 
-table_01 = '''fed.task6_civis_estimate_serious_damage_leftjoin_hud__demographics'''
+#table_01 = '''fed.task6_civis_estimate_serious_damage_leftjoin_hud__demographics'''
+table_01 = sys.argv[1]
+table_02 = sys.argv[2]
 
-
-table_02 = '''dev.high_water_rescue'''
+#table_02 = '''dev.high_water_rescue'''
 #table = os.environ["table_01"]
 #table2 = os.environ["table_02"]
 #print('This is table 01:' , table)
