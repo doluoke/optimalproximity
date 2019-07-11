@@ -30,7 +30,7 @@ import matplotlib
 
 #--------------------------------------------------------------
 print('This code started')
-print('This is table', table_01)
+#print('This is table', table_01)
 #table = os.environ["table_01"]
 #table2 = os.environ["table_02"]
 #print('This is table 01:' , table)
