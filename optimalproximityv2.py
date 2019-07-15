@@ -60,39 +60,38 @@ table_out = sys.argv[6]
 
 # record level data 
 
-unmatched_query= '''
+table01_query= '''
 
     
     SELECT
-     userdefinedfltyid,
+      userdefinedfltyid,
       latitude as latitude_ref,
-      longitude as longitude_ref,serious_damage_bucket__hazus,flood_zone_type__hazus,
-      neighborhood__hazus
+      longitude as longitude_ref
     FROM ''' + table_01 + ''' as ia
-    WHERE data_boolean__hud=0
+    
     
     ORDER BY userdefinedfltyid
 
 '''
 
-unmatched_query_table = civis.io.read_civis_sql(
-    unmatched_query,"City of Houston",use_pandas=True
+table01_query_table = civis.io.read_civis_sql(
+    table01_query,"City of Houston",use_pandas=True
 )
 
 
-print(unmatched_query)
+#print(table01_query)
 
-# 1b) Convert the imported unmatched table to GeoDataFrame
-unmatched_query_geo = gpd.GeoDataFrame(unmatched_query_table)
-unmatched_query_geo['point'] = unmatched_query_geo.apply(lambda x: Point(x['longitude_ref'],x['latitude_ref']), axis = 1)
-unmatched_query_geo['geometry'] = unmatched_query_geo.point
+# 1b) Convert the imported table01 table to GeoDataFrame
+table01_query_geo = gpd.GeoDataFrame(table01_query_table)
+table01_query_geo['point'] = table01_query_geo.apply(lambda x: Point(x['longitude_ref'],x['latitude_ref']), axis = 1)
+table01_query_geo['geometry'] = table01_query_geo.point
 
-# 1c) Convert umatched point -unmatched_query_geo from Geographic to UTM Zone 15N
-unmatched_query_geo_crs = unmatched_query_geo
+# 1c) Convert umatched point -table01_query_geo from Geographic to UTM Zone 15N
+table01_query_geo_crs = table01_query_geo
 # Assign WGS 84 Coordinate System
-unmatched_query_geo_crs.crs = from_epsg(ref_01)
+table01_query_geo_crs.crs = from_epsg(ref_01)
 # Project from WGS to Projected Coordinate System
-unmatched_query_geo_prj = unmatched_query_geo_crs.to_crs(epsg=ref_prj)
+table01_query_geo_prj = table01_query_geo_crs.to_crs(epsg=ref_prj)
 
 
 
@@ -157,10 +156,10 @@ def ckdnearest(gdA,acol, gdB, bcol):
     return df
 
 
-# 2) Estimate Nearest Distance of unmatched points to events:
+# 2) Estimate Nearest Distance of table01 points to events:
 
 # 2c) highwater rescues
-nearest_highwater =ckdnearest(unmatched_query_geo_prj,'userdefinedfltyid', highwater_geo_prj,'objectid_1')
+nearest_highwater =ckdnearest(table01_query_geo_prj,'userdefinedfltyid', highwater_geo_prj,'objectid_1')
 
 #..................................................................
 #create table dr.optimal authorization dokeowo;
