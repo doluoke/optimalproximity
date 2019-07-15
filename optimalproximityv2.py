@@ -92,7 +92,7 @@ unmatched_query_geo_crs = unmatched_query_geo
 # Assign WGS 84 Coordinate System
 unmatched_query_geo_crs.crs = from_epsg(ref_01)
 # Project from WGS to Projected Coordinate System
-unmatched_query_geo_prj = unmatched_query_geo_crs.to_crs(epsg=32615)
+unmatched_query_geo_prj = unmatched_query_geo_crs.to_crs(epsg=ref_prj)
 
 
 
@@ -136,7 +136,7 @@ highwater_geo_crs = highwater_geo
 highwater_geo_crs.crs = from_epsg(ref_02)
 print(highwater_geo.crs)
 #Project from WGS to Projected Coordinate System
-highwater_geo_prj = highwater_geo.to_crs(epsg=32615)
+highwater_geo_prj = highwater_geo.to_crs(epsg=ref_prj)
 highwater_geo_prj.head()
 
 # Step II: Spatial indexing in GeoPandas (kdTree) to find the nearest neighbor
