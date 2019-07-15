@@ -44,6 +44,7 @@ ref_01   = int(sys.argv[2])
 table_02 = sys.argv[3]
 ref_02   = int(sys.argv[4])
 ref_prj = int(sys.argv[5])
+table_out = sys.argv[6]
 
 #table_02 = '''dev.high_water_rescue'''
 # ref_01 = 4326
@@ -161,6 +162,6 @@ nearest_highwater =ckdnearest(unmatched_query_geo_prj, highwater_geo_prj,'object
 #..................................................................
 #create table dr.optimal authorization dokeowo;
 
-optimalproimity = civis.io.dataframe_to_civis(nearest_highwater, "City of Houston",'dr.nearest_table')
+optimalproimity = civis.io.dataframe_to_civis(nearest_highwater, "City of Houston",table_out)
 optimalproimity.result()
 print('I got to the last line')
