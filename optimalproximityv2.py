@@ -99,6 +99,10 @@ table01_query_geo_prj = table01_query_geo_crs.to_crs(epsg=ref_prj)
 #--------------------------------------------------------------
 # record level data 
 
+
+table02_query= ''' SELECT ''' +  indkey_02 + ''', ''' + latitude_02 + ''' as latitude,''' + longitude_02 + ''' as longitude FROM ''' + table_02 + ''' as h ORDER BY ''' + indkey_02
+
+
 table02_query= '''
 SELECT
      
