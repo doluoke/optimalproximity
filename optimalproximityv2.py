@@ -144,20 +144,21 @@ from scipy.spatial import cKDTree
 
 # 1b) Define function for kdTree
 
-def ckdnearest(gdA, gdB, bcol):   
+def ckdnearest(gdA,acol, gdB, bcol):   
     nA = np.array(list(zip(gdA.geometry.x, gdA.geometry.y)) )
     nB = np.array(list(zip(gdB.geometry.x, gdB.geometry.y)) )
     btree = cKDTree(nB)
     dist, idx = btree.query(nA,k=1)
     df = pd.DataFrame.from_dict({'distance': dist.astype(float),
-                             'ID_of_NearestPoint' : gdB.loc[idx, bcol].values })
+                             'ID_of_NearestPoint' : gdB.loc[idx, bcol].values,
+                             'ID_of_TableA' : gdA[acol].values  })
     return df
 
 
 # 2) Estimate Nearest Distance of unmatched points to events:
 
 # 2c) highwater rescues
-nearest_highwater =ckdnearest(unmatched_query_geo_prj, highwater_geo_prj,'objectid_1')
+nearest_highwater =ckdnearest(unmatched_query_geo_prj,'userdefinedfltyid', highwater_geo_prj,'objectid_1')
 
 #..................................................................
 #create table dr.optimal authorization dokeowo;
