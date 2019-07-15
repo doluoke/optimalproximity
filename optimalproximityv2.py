@@ -98,7 +98,7 @@ table01_query_geo_prj = table01_query_geo_crs.to_crs(epsg=ref_prj)
 #--------------------------------------------------------------
 # record level data 
 
-highwater_query= '''
+table02_query= '''
 SELECT
      
         objectid_1,
@@ -113,30 +113,30 @@ ORDER BY h.objectid_1
 
 '''
 print('This code completed')
-highwater_table = civis.io.read_civis_sql(
-    highwater_query,"City of Houston",use_pandas=True
+table02_table = civis.io.read_civis_sql(
+    table02_query,"City of Houston",use_pandas=True
 )
 
 
-print(highwater_query)
+print(table02_query)
 #You may uncomment this
-#highwater_table.head()
+#table02_table.head()
 
 
 # 2b) Convert the imported matched point to GeoDataFrame
-highwater_geo = gpd.GeoDataFrame(highwater_table)
-highwater_geo['point'] = highwater_geo.apply(lambda x: Point(x['longitude'],x['latitude']), axis = 1)
-highwater_geo['geometry'] = highwater_geo.point
+table02_geo = gpd.GeoDataFrame(table02_table)
+table02_geo['point'] = table02_geo.apply(lambda x: Point(x['longitude'],x['latitude']), axis = 1)
+table02_geo['geometry'] = table02_geo.point
 
-# 4c) Convert highwater point -highwater_geo from Geographic to UTM Zone 15N
+# 4c) Convert table02 point -table02_geo from Geographic to UTM Zone 15N
 #print(debris_geo.crs)
-highwater_geo_crs = highwater_geo
+table02_geo_crs = table02_geo
 # Assign WGS 84 Coordinate System
-highwater_geo_crs.crs = from_epsg(ref_02)
-print(highwater_geo.crs)
+table02_geo_crs.crs = from_epsg(ref_02)
+print(table02_geo.crs)
 #Project from WGS to Projected Coordinate System
-highwater_geo_prj = highwater_geo.to_crs(epsg=ref_prj)
-highwater_geo_prj.head()
+table02_geo_prj = table02_geo.to_crs(epsg=ref_prj)
+table02_geo_prj.head()
 
 # Step II: Spatial indexing in GeoPandas (kdTree) to find the nearest neighbor
 from scipy.spatial import cKDTree 
@@ -158,12 +158,12 @@ def ckdnearest(gdA,acol, gdB, bcol):
 
 # 2) Estimate Nearest Distance of table01 points to events:
 
-# 2c) highwater rescues
-nearest_highwater =ckdnearest(table01_query_geo_prj,'userdefinedfltyid', highwater_geo_prj,'objectid_1')
+# 2c) table02 rescues
+nearest_table02 =ckdnearest(table01_query_geo_prj,'userdefinedfltyid', table02_geo_prj,'objectid_1')
 
 #..................................................................
 #create table dr.optimal authorization dokeowo;
 
-optimalproimity = civis.io.dataframe_to_civis(nearest_highwater, "City of Houston",table_out)
+optimalproimity = civis.io.dataframe_to_civis(nearest_table02, "City of Houston",table_out)
 #optimalproimity.result()
 print('I got to the last line')
