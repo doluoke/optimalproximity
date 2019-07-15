@@ -55,8 +55,8 @@ indkey_02    = sys.argv[10]
 
 
 
-ref_prj = int(sys.argv[5])
-table_out = sys.argv[6]
+ref_prj = int(sys.argv[11])
+table_out = sys.argv[12]
 
 #table_02 = '''dev.high_water_rescue'''
 # ref_01 = 4326
