@@ -39,10 +39,22 @@ print('This code started')
 #print('This is 3 after python', sys.argv[4], 'and type is:', type(sys.argv[4]))
 
 #table_01 = '''fed.task6_civis_estimate_serious_damage_leftjoin_hud__demographics'''
-table_01 = sys.argv[1]
-ref_01   = int(sys.argv[2])
-table_02 = sys.argv[3]
-ref_02   = int(sys.argv[4])
+table_01     = sys.argv[1]
+longitude_01 = sys.argv[2]
+latitude_01  = sys.argv[3]
+ref_01       = int(sys.argv[4])
+indkey_01    = sys.argv[5]
+
+
+table_02     = sys.argv[6]
+longitude_02 = sys.argv[7]
+latitude_02  = sys.argv[8]
+ref_02       = int(sys.argv[9])
+indkey_02    = sys.argv[10]
+
+
+
+
 ref_prj = int(sys.argv[5])
 table_out = sys.argv[6]
 
@@ -63,14 +75,14 @@ table_out = sys.argv[6]
 table01_query= '''
 
     
-    SELECT
-      userdefinedfltyid,
-      latitude as latitude_ref,
-      longitude as longitude_ref
+    SELECT''' +
+      indkey_01 + ''',''' +
+      latitude_01 + ''''as latitude_ref,''' +
+      longitude_01 + ''' as longitude_ref
     FROM ''' + table_01 + ''' as ia
     
     
-    ORDER BY userdefinedfltyid
+    ORDER BY''' + indkey_01
 
 '''
 
