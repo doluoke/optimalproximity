@@ -84,7 +84,6 @@ table01_query= '''
     
     ORDER BY''' + indkey_01
 
-'''
 
 table01_query_table = civis.io.read_civis_sql(
     table01_query,"City of Houston",use_pandas=True
