@@ -72,17 +72,7 @@ table_out = sys.argv[12]
 
 # record level data 
 
-table01_query= '''
-
-    
-    SELECT ''' +
-      indkey_01 + ''',''' +
-      latitude_01 + ''' as latitude_ref,''' +
-      longitude_01 + ''' as longitude_ref
-    FROM ''' + table_01 + ''' as ia
-    
-    
-    ORDER BY ''' + indkey_01
+table01_query= ''' SELECT ''' +  indkey_01 + ''', ''' + latitude_01 + ''' as latitude_ref,''' + longitude_01 + ''' as longitude_ref FROM ''' + table_01 + ''' as ia ORDER BY ''' + indkey_01
 
 
 table01_query_table = civis.io.read_civis_sql(
