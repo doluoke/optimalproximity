@@ -102,21 +102,6 @@ table01_query_geo_prj = table01_query_geo_crs.to_crs(epsg=ref_prj)
 
 table02_query= ''' SELECT ''' +  indkey_02 + ''', ''' + latitude_02 + ''' as latitude,''' + longitude_02 + ''' as longitude FROM ''' + table_02 + ''' as h ORDER BY ''' + indkey_02
 
-
-table02_query= '''
-SELECT
-     
-        objectid_1,
-        lat as latitude,
-        long as longitude
-
-
-FROM ''' + table_02 + ''' as h
-
-   
-ORDER BY h.objectid_1
-
-'''
 print('This code completed')
 table02_table = civis.io.read_civis_sql(
     table02_query,"City of Houston",use_pandas=True
