@@ -166,5 +166,5 @@ nearest_highwater =ckdnearest(unmatched_query_geo_prj,'userdefinedfltyid', highw
 #create table dr.optimal authorization dokeowo;
 
 optimalproimity = civis.io.dataframe_to_civis(nearest_highwater, "City of Houston",table_out)
-optimalproimity.result()
+#optimalproimity.result()
 print('I got to the last line')
