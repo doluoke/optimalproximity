@@ -166,7 +166,7 @@ def ckdnearest(gdA,acol, gdB, bcol):
 # 2) Estimate Nearest Distance of table01 points to events:
 
 # 2c) table02 rescues
-nearest_table02 =ckdnearest(table01_query_geo_prj,'userdefinedfltyid', table02_geo_prj,'objectid_1')
+nearest_table02 =ckdnearest(table01_query_geo_prj,indkey_01, table02_geo_prj, indkey_02)
 
 #..................................................................
 #create table dr.optimal authorization dokeowo;
