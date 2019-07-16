@@ -139,9 +139,9 @@ def ckdnearest(gdA,acol, gdB, bcol):
     btree = cKDTree(nB)
     dist, idx = btree.query(nA,k=1)
     df = pd.DataFrame.from_dict({
-                             'ID_of_TableA' : gdA[acol].values, 
-                             'ID_of_NearestPoint' : gdB.loc[idx, bcol].values,
-                             'distance': dist.astype(float)
+                             'ID_of_Table_A' : gdA[acol].values, 
+                             'ID_of_NearestPoint_B' : gdB.loc[idx, bcol].values,
+                             'distance_to_nearest_b': dist.astype(float)
                              })
     return df
 
