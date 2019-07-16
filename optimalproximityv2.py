@@ -45,18 +45,29 @@ latitude_01  = sys.argv[3]
 ref_01       = int(sys.argv[4])
 indkey_01    = sys.argv[5]
 
-
 table_02     = sys.argv[6]
 longitude_02 = sys.argv[7]
 latitude_02  = sys.argv[8]
 ref_02       = int(sys.argv[9])
 indkey_02    = sys.argv[10]
 
-
-
-
 ref_prj = int(sys.argv[11])
 table_out = sys.argv[12]
+
+print(table_01)
+print(longitude_01)
+print(latitude_01)
+print(ref_01)
+print(indkey_01)
+print(table_02)
+print(longitude_02)
+print(latitude_02)
+print(ref_02)
+print(indkey_02)
+print(ref_prj)
+print(table_out)
+print()
+
 
 #table_02 = '''dev.high_water_rescue'''
 # ref_01 = 4326
