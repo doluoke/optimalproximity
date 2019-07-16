@@ -23,7 +23,8 @@ from scipy import stats
 from fiona.crs import from_epsg
 import warnings
 warnings.filterwarnings('ignore')
-from sqlalchemy import create_engine
+import time
+import random
 
 
 import matplotlib
@@ -166,8 +167,14 @@ def ckdnearest(gdA,acol, gdB, bcol):
 # 2) Estimate Nearest Distance of table01 points to events:
 
 # 2c) table02 rescues
+
+# Record Start Time
+then = time.time() #Time before the operations start
 nearest_table02 =ckdnearest(table01_query_geo_prj,indkey_01, table02_geo_prj, indkey_02)
 
+# Record Stop Time
+now = time.time() #Time after it finished
+print("It took: ", now-then, " seconds to compute the nearest point")
 #..................................................................
 #create table dr.optimal authorization dokeowo;
 
