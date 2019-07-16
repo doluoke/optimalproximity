@@ -125,6 +125,12 @@ print(table02_query)
 
 
 # 2b) Convert the imported matched point to GeoDataFrame
+
+# Convert coordinates to numeric. This part of the code may slow it down
+table02_table['latitude'] = table02_table.latitude.convert_objects(convert_numeric=True)
+table02_table['longitude'] = table02_table.longitude.convert_objects(convert_numeric=True)
+
+# Convert to Geographic Points
 table02_geo = gpd.GeoDataFrame(table02_table)
 table02_geo['point'] = table02_geo.apply(lambda x: Point(x['longitude'],x['latitude']), axis = 1)
 table02_geo['geometry'] = table02_geo.point
