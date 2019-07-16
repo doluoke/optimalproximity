@@ -54,6 +54,7 @@ indkey_02    = sys.argv[10]
 
 ref_prj = int(sys.argv[11])
 table_out = sys.argv[12]
+database = sys.argv[13]
 
 print(table_01)
 print(longitude_01)
@@ -88,7 +89,7 @@ table01_query= ''' SELECT ''' +  indkey_01 + ''', ''' + latitude_01 + ''' as lat
 
 
 table01_query_table = civis.io.read_civis_sql(
-    table01_query,"City of Houston",use_pandas=True
+    table01_query,database,use_pandas=True
 )
 
 
@@ -116,7 +117,7 @@ table02_query= ''' SELECT ''' +  indkey_02 + ''', ''' + latitude_02 + ''' as lat
 
 print('This code completed')
 table02_table = civis.io.read_civis_sql(
-    table02_query,"City of Houston",use_pandas=True
+    table02_query,database,use_pandas=True
 )
 
 
@@ -178,6 +179,6 @@ print("It took: ", now-then, " seconds to compute the nearest point")
 #..................................................................
 #create table dr.optimal authorization dokeowo;
 
-optimalproimity = civis.io.dataframe_to_civis(nearest_table02, "City of Houston",table_out)
+optimalproimity = civis.io.dataframe_to_civis(nearest_table02, database,table_out)
 #optimalproimity.result()
 print('I got to the last line')
