@@ -32,6 +32,9 @@ import matplotlib
 
 #--------------------------------------------------------------
 print('This code started')
+# Record Start Time
+then2 = time.time() #Time before the operations start
+
 #conn = create_engine('redshift+psycopg2://dokeowo@host.amazonaws.com:5439/database')
 #print('This is 0 after python', sys.argv[0], 'and type is:', type(sys.argv[0]))
 #print('This is 1 after python', sys.argv[1], 'and type is:', type(int(sys.argv[1])))
@@ -156,12 +159,23 @@ def ckdnearest(gdA,acol, gdB, bcol):
     nA = np.array(list(zip(gdA.geometry.x, gdA.geometry.y)) )
     nB = np.array(list(zip(gdB.geometry.x, gdB.geometry.y)) )
     btree = cKDTree(nB)
-    dist, idx = btree.query(nA,k=1)
+    # Find the 2 closest points
+    
+    dist, idx = btree.query(nA, 2)
+
+    # Choose the closest point other than itself
+    
+    indx_zero = dist[:,0] == 0
+    dist[indx_zero,0] = dist[indx_zero,1]
+    idx[indx_zero,0] = idx[indx_zero,1]
+    
     df = pd.DataFrame.from_dict({
                              'ID_of_Table_A' : gdA[acol].values, 
-                             'ID_of_NearestPoint_B' : gdB.loc[idx, bcol].values,
-                             'distance_to_nearest_b': dist.astype(float)
+                             'ID_of_NearestPoint_B' : gdB.loc[idx[:,0], bcol].values,
+                             'distance_to_nearest_B': dist[:,0].astype(float)
                              })
+    df.set_index(['ID_of_Table_A','ID_of_NearestPoint_B','distance_to_nearest_b'],inplace=True)
+
     return df
 
 
@@ -180,5 +194,9 @@ print("It took: ", now-then, " seconds to compute the nearest point")
 #create table dr.optimal authorization dokeowo;
 
 optimalproimity = civis.io.dataframe_to_civis(nearest_table02, database,table_out)
+
+# Record Stop Time
+now2 = time.time() #Time after it finished
+print("Time taken to run the entire code : ", now2-then2, " seconds")
 #optimalproimity.result()
 print('I got to the last line')
