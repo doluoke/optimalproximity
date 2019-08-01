@@ -199,7 +199,7 @@ def ckdnearest(gdA,acol, gdB, bcol):
     df = pd.DataFrame.from_dict({
                              'ID_of_Table_A' : gdA[acol].values, 
                              'ID_of_NearestPoint_B' : gdB.loc[idx[:,0], bcol].values,
-                             'distance_to_nearest_B': dist[:,0].astype(float)
+                             'distance_to_nearest_B_meters': dist[:,0].astype(float)
                              })
     #df.set_index(['ID_of_Table_A','ID_of_NearestPoint_B','distance_to_nearest_B'],inplace=True)
 
