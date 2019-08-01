@@ -220,7 +220,7 @@ print("It took: ", now-then, " seconds to compute the nearest point")
 #..................................................................
 #create table dr.optimal authorization dokeowo;
 
-optimalproimity = civis.io.dataframe_to_civis(nearest_table02, database,table_out)
+optimalproimity = civis.io.dataframe_to_civis(nearest_table02, database,table_out,existing_table_rows = 'drop')
 
 # Record Stop Time
 now2 = time.time() #Time after it finished
