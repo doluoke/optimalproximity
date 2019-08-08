@@ -216,7 +216,7 @@ nearest_table02 =ckdnearest(table01_query_geo_prj,indkey_01, table02_geo_prj, in
 
 # Record Stop Time
 now = time.time() #Time after it finished
-print("It took: ", now-then, " seconds to compute the nearest point")
+#print("It took: ", now-then, " seconds to compute the nearest point")
 #..................................................................
 #create table dr.optimal authorization dokeowo;
 
@@ -224,6 +224,69 @@ optimalproimity = civis.io.dataframe_to_civis(nearest_table02, database,table_ou
 
 # Record Stop Time
 now2 = time.time() #Time after it finished
-print("Time taken to run the entire code : ", now2-then2, " seconds")
+#print("Time taken to run the entire code : ", now2-then2, " seconds")
 #optimalproimity.result()
-print('I got to the last line')
+#print('I got to the last line')
+
+# Generate quick summary report of the Script
+
+# Summary of Table A
+TableA_name = table_01.split('.')[1]
+[rows_A, cols_A] =np.shape(table01_query_table)
+a =table01_query_table[indkey_01].nunique()
+[rows_B, cols_B] =np.shape(table02_table)
+
+
+# Summary of Table B.
+TableB_name = table_02.split('.')[1]
+[rows_B, cols_B] =np.shape(table02_table)
+B =table02_table[indkey_01].nunique()
+[rows_B, cols_B] =np.shape(table02_table)
+
+# Summary of Output Table
+[rows_out, cols_out] =np.shape(nearest_table02)
+distinct_closestB =nearest_table02['ID_of_NearestPoint_B'].nunique()
+
+#
+
+# Below is a summary of the report from the script
+print('----------------------------------------------------------------------------------------------')
+print('Note: If the output table name already exist in the schema, the existing table is overwritten')
+print('----------------------------------------------------------------------------------------------\n')
+
+print('..........................................About Table A i.e....................................')
+print('----',TableA_name, '---column name---', indkey_01)
+#  Print the number of rows of table A
+print('1.   Table A i.e.: ', TableA_name, 'has ', rows_A, ' number of rows')
+#  Print the number of distinct rows of table A
+print('2.   Table A i.e.: ', TableA_name, 'has ', a, ' number of DISTINCT rows')
+print('----------------------------------------------------------------------------------------------\n')
+# About Table B
+print('----------------------------------------------------------------------------------------------')
+print('..........................................About Table B i.e....................................')
+print('#.   ----',TableB_name, '---column name---', indkey_02)
+#  Print the number of rows of table A
+print('1.   Table B i.e.: ', TableB_name, 'has ', rows_B, ' number of rows')
+#  Print the number of distinct rows of table A
+print('2.   Table B i.e.: ', TableB_name, 'has ', B, ' number of DISTINCT rows')
+print('----------------------------------------------------------------------------------------------\n')
+print('.....................................Summary of Output Table i.e..............................')
+print('#.   ----',table_out,'----')
+#  Print the number of rows of Output Table 
+print('1.   Output Table i.e.: ', table_out, 'has ', rows_out, ' number of rows')
+print('2.   The number of distinct closest points from Table B i.e.', TableB_name,'is ', distinct_closestB)
+print('         --Hence, there are ', B - distinct_closestB,' points in Table B, that are not closest to any points in Table A ')
+print('----------------------------------------------------------------------------------------------\n')
+print('........................................Summary of Time.......................................')
+print("1.   Time taken to run the entire code : ", format((now2-then2)/60,'.2f'), " minutes")
+print("2.   It took: ", format(now-then,'.2f'), " seconds to compute the nearest point")
+
+
+
+
+
+
+
+
+
+
