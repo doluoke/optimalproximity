@@ -77,7 +77,8 @@ ref_02 = ref_01
 
 #--------------------------------------------------------------
 
-#---------------------------------------------------------------------------------------
+# Civis Client
+client = APIClient()
 
 #Check if the tables exist
 
@@ -91,9 +92,6 @@ table_check_list['schema_table'] = table_check_list['schema'] +'.'+ table_check_
 # Extract schema and Table names from input
 schema_table_01= table_01.split('.')
 schema_table_02= table_02.split('.')
-
-
-
 
 #---------------------------------------------------------------------------------------
 # Check if the Schema_01 exist
