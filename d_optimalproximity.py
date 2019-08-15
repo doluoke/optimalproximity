@@ -74,31 +74,141 @@ database = sys.argv[10]
 ref_01 = 4326
 ref_02 = ref_01
 
-print(table_01)
-print(longitude_01)
-print(latitude_01)
-print(ref_01)
-print(indkey_01)
-print(table_02)
-print(longitude_02)
-print(latitude_02)
-print(ref_02)
-print(indkey_02)
-#print(ref_prj)
-print(table_out)
-print(database)
+
+#--------------------------------------------------------------
+
+#---------------------------------------------------------------------------------------
+
+#Check if the tables exist
+
+table_check = client.tables.list()
+table_check_list = pd.DataFrame(table_check)
+
+# Concatenate columns in dataframe
+table_check_list['schema_table'] = table_check_list['schema'] +'.'+ table_check_list['name']
 
 
-#table_02 = '''dev.high_water_rescue'''
-# ref_01 = 4326
-# ref_02 = 4326
-#ref_prj = 32615
-#table = os.environ["table_01"]
-#table2 = os.environ["table_02"]
-#print('This is table 01:' , table)
-#print('This is table 02:' ,table2)
-#print('This type table 01:' ,type(table))
-#print('This type table 02:' ,type(table2))
+# Extract schema and Table names from input
+schema_table_01= table_01.split('.')
+schema_table_02= table_02.split('.')
+
+
+
+
+#---------------------------------------------------------------------------------------
+# Check if the Schema_01 exist
+
+print('-----INPUT ERROR CHECK BEGINS-------')
+
+if (table_check_list.schema ==schema_table_01[0]).any() == 1:
+    print('1.  The Table_A "', schema_table_01[0],'"', 'schema exist (CHECK)')
+else:
+    print('1.  The Table_A "', schema_table_01[0],'"', 'schema does not exist (FAILED)')
+    print('----Make sure the name is spelt correctly. THE CODE WILL EXIT NOW!')
+    sys.exit()
+
+# Check if the Table_01 exist 
+if (table_check_list.name ==schema_table_01[1]).any() == 1:
+    print('2.  The Table_A "', schema_table_01[1],'"', 'table exist (CHECK)')
+else:
+    print('2.  The Table_A "', schema_table_01[1],'"', 'table does not exist (FAILED)')
+    print('----Make sure the name is spelt correctly. THE CODE WILL EXIT NOW!')
+    sys.exit()
+    
+    
+# Check if the Schema_02 exist    
+if (table_check_list.schema ==schema_table_02[0]).any() == 1:
+    print('3.  The Table_B "', schema_table_02[0],'"', 'schema exist (CHECK)')
+else:
+    print('3.  The Table_B "', schema_table_02[0],'"', 'schema does not exist (FAILED)')
+    print('----Make sure the name is spelt correctly. THE CODE WILL EXIT NOW!')
+    sys.exit()
+
+# Check if the Table_02 exist
+if (table_check_list.name ==schema_table_02[1]).any() == 1:
+    print('4.  The Table_B "', schema_table_02[1],'"', 'table exist (CHECK)')
+else:
+    print('4.  The Table_B "', schema_table_02[1],'"', 'table does not exist (FAILED)')
+    print('----Make sure the name is spelt correctly. THE CODE WILL EXIT NOW!')
+    sys.exit()
+    
+# Check if the Schema.Table_01 exist  
+if (table_check_list.schema_table ==table_01).any() == 1:
+    print('5.  The schema.table_A "', table_01,'"', 'exist (CHECK)')
+else:
+    print('5.  The schema.table_A "', table_01,'"', 'does not exist (FAILED)')
+    print('----Make sure the name is spelt correctly. THE CODE WILL EXIT NOW!')
+    sys.exit()
+
+# Check if the Schema.Table_02 exist
+if (table_check_list.schema_table ==table_02).any() == 1:
+    print('6.  The schema.table_B "', table_02,'"', 'exist (CHECK)')
+else:
+    print('6.  The schema.table_B "', table_02,'"', 'does not exist (FAILED)')
+    print('----Make sure the name is spelt correctly. THE CODE WILL EXIT NOW!')
+    sys.exit()
+    
+
+# Extract the ID of the Table
+table_01_id = [table_check_list[table_check_list.schema_table ==table_01]['id'].tolist()][0]
+table_02_id = [table_check_list[table_check_list.schema_table ==table_02]['id'].tolist()][0]
+
+table_01_info = client.tables.get(table_01_id[0])
+table_02_info = client.tables.get(table_02_id[0])
+
+table_01_info_dataFrame = pd.DataFrame(table_01_info.columns)
+table_02_info_dataFrame = pd.DataFrame(table_02_info.columns)
+
+
+# Check if columns exists in Tables
+if (table_01_info_dataFrame['name'] == indkey_01).any() == 1:
+ print('7.  The column "', indkey_01,'"','exist in', '"',table_01, '" (CHECK)' )
+else:
+    print('7.  The column "', indkey_01,'"','does not exist in', '"',table_01, '" (FAILED)' )
+    print('----Make sure the name is spelt correctly. THE CODE WILL EXIT NOW!')
+    sys.exit()
+
+
+if (table_02_info_dataFrame['name'] == indkey_02).any() == 1:
+ print('8.  The column "', indkey_02,'"','exist in', '"',table_02, '" (CHECK)' )
+else:
+    print('8.  The column "', indkey_02,'"','does not exist in', '"',table_02, '" (FAILED)' )
+    print('----Make sure the name is spelt correctly. THE CODE WILL EXIT NOW!')
+    sys.exit()
+
+
+
+# Check if longitude and latitude columns exists in Table A
+if (table_01_info_dataFrame['name'] == longitude_01).any() == 1:
+ print('9.  The column "', longitude_01,'"','exist in', '"',table_01, '" (CHECK)' )
+else:
+    print('9.  The column "', indkey_01,'"','does not exist in', '"',table_01, '" (FAILED)' )
+    print('----Make sure the name is spelt correctly. THE CODE WILL EXIT NOW!')
+    sys.exit()
+
+if (table_01_info_dataFrame['name'] == latitude_01).any() == 1:
+    print('10.  The column "', latitude_01,'"','exist in', '"',table_01, '" (CHECK)' )
+else:
+    print('10.  The column "', latitude_01,'"','does not exist in', '"',table_01, '" (FAILED)' )
+    print('----Make sure the name is spelt correctly. THE CODE WILL EXIT NOW!')
+    sys.exit()
+
+# Check if longitude and latitude columns exists in Table B
+if (table_02_info_dataFrame['name'] == longitude_02).any() == 1:
+    print('11.  The column "', longitude_02,'"','exist in', '"',table_02, '" (CHECK)' )
+else:
+    print('11.  The column "', longitude_02,'"','does not exist in', '"',table_02, '" (FAILED)' )
+    print('----Make sure the name is spelt correctly. THE CODE WILL EXIT NOW!')
+    sys.exit()
+
+if (table_02_info_dataFrame['name'] == latitude_02).any() == 1:
+    print('12.  The column "', latitude_02,'"','exist in', '"',table_02, '" (CHECK)' )
+else:
+    print('12.  The column "', latitude_02,'"','does not exist in', '"',table_02, '" (FAILED)' )
+    print('----Make sure the name is spelt correctly. THE CODE WILL EXIT NOW!')
+    sys.exit()
+    
+    
 #--------------------------------------------------------------
 
 # record level data 
