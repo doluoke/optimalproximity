@@ -25,10 +25,16 @@ import warnings
 warnings.filterwarnings('ignore')
 import time
 import random
-
-
+from civis import APIClient
 import matplotlib
-#%matplotlib inline
+
+#--------------------------------------------------------------
+print('This code started')
+# Record Start Time
+then2 = time.time() #Time before the operations start
+
+
+#--------------------------------------------------------------
 # Function Declaration
 
 def convert_wgs_to_utm(lon, lat):
@@ -42,9 +48,7 @@ def convert_wgs_to_utm(lon, lat):
     return int(epsg_code)
 
 #--------------------------------------------------------------
-print('This code started')
-# Record Start Time
-then2 = time.time() #Time before the operations start
+
 
 #conn = create_engine('redshift+psycopg2://dokeowo@host.amazonaws.com:5439/database')
 #print('This is 0 after python', sys.argv[0], 'and type is:', type(sys.argv[0]))
@@ -285,6 +289,7 @@ print(table02_geo.crs)
 table02_geo_prj = table02_geo.to_crs(epsg=ref_prj_02)
 table02_geo_prj.head()
 
+#--------------------------------------------------------------
 # Step II: Spatial indexing in GeoPandas (kdTree) to find the nearest neighbor
 from scipy.spatial import cKDTree 
 
